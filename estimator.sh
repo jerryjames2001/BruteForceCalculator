@@ -68,8 +68,18 @@ estimate_cracking_time() {
 
 # Input password and hashing speed
 read -p "Enter your password: " password
-read -p "Enter the hashing speed (hashes/second): " hashes_per_second
 
+default_hash_rate=$((10**17))
+echo "Default has rate/sec is set to $default_hash_rate"
+read -p "Do you what to use another hash rate (y/n)" status
+
+if [[ $status == "y" || $status == "Y" ]]; then
+read -p "Enter new hash rate : " hashes_per_second
+else
+hashes_per_second=$default_hash_rate
+fi
+
+echo "Hash rate = $hashes_per_second"
 
 loading_screen 50 #adjust the timr if neede 50 = 5 seconds
 
